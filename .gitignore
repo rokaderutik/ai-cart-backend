@@ -1,4 +1,8 @@
 HELP.md
+AI-Cart-Development-Phases.txt
+.env
+.env.*
+!.env.example
 target/
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/

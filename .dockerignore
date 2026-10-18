@@ -1,0 +1,8 @@
+.git
+.idea
+.mvn
+target
+HELP.md
+AI-Cart-Development-Phases.txt
+*.env
+.env*
