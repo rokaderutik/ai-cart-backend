@@ -1,6 +1,6 @@
 # AI Cart backend
 
-Spring Boot API for the restaurant RAG application. This repository is currently implementing Phase 1: connectivity and deployment. The separate React frontend will call this API.
+Spring Boot API for the restaurant RAG application. Phase 1 is complete: the backend and separate React frontend are deployed and connected, and Neon, Gemini chat, and embedding connectivity have been verified.
 
 ## Requirements
 
@@ -21,7 +21,7 @@ For local development, edit the dummy values in the root `.env` file. The `dev` 
 | `DB_USERNAME` | Neon database user |
 | `DB_PASSWORD` | Neon database password |
 | `GOOGLE_API_KEY` | Gemini Developer API key for chat and embeddings |
-| `FRONTEND_ORIGIN` | Exact React origin for CORS; defaults to `http://localhost:5173` in `dev` and is required in `prod` |
+| `FRONTEND_ORIGIN` | Exact React origin for CORS; `dev` allows this origin plus `http://localhost:5173`, while `prod` allows only this configured origin |
 | `SPRING_PROFILES_ACTIVE` | `dev` locally, `prod` on Render |
 | `PORT` | HTTP port supplied by Render; defaults to `8080` in `prod` |
 
