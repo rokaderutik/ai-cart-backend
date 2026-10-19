@@ -1,6 +1,6 @@
 package com.rutikrokade.projects.aicartapp.controller;
 
-import com.rutikrokade.projects.aicartapp.dto.HealthStatus;
+import com.rutikrokade.projects.aicartapp.dto.HealthStatusDto;
 import com.rutikrokade.projects.aicartapp.service.HealthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,11 +15,11 @@ public class HealthController {
     private final HealthService healthService;
 
     @GetMapping("/health")
-    public ResponseEntity<HealthStatus> health() {
+    public ResponseEntity<HealthStatusDto> health() {
         if (healthService.isDatabaseAvailable()) {
-            return ResponseEntity.ok(new HealthStatus("UP"));
+            return ResponseEntity.ok(new HealthStatusDto("UP"));
         }
         return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
-                .body(new HealthStatus("DOWN"));
+                .body(new HealthStatusDto("DOWN"));
     }
 }

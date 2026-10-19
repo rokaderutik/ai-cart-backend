@@ -1,6 +1,6 @@
 # AI Cart backend
 
-Spring Boot API for the restaurant RAG application. Phase 1 is complete: the backend and separate React frontend are deployed and connected, and Neon, Gemini chat, and embedding connectivity have been verified.
+Spring Boot API for the restaurant RAG application. Phase 1 is deployed and connected. Phase 2 adds anonymous sessions, persistent carts, sample menu data, and a shared API response/error format. See [the Phase 2 implementation plan](docs/phase-2.md).
 
 ## Requirements
 
@@ -27,9 +27,9 @@ For local development, edit the dummy values in the root `.env` file. The `dev` 
 
 The same `GOOGLE_API_KEY` is assigned explicitly to both the chat and embedding connection properties. Gemini Developer API authentication does not require a Google Cloud project ID or location. Keep `user` and `password` out of `DB_JDBC_URL`; use `DB_USERNAME` and `DB_PASSWORD` so startup logs do not include credentials in the JDBC URL.
 
-`application.properties` contains the application name, the shared `/api/v1` servlet context path, and the default `dev` profile. `application-dev.properties` imports `.env`; `application-prod.properties` uses deployment environment variables and Render's `PORT`. The production profile does not import `.env`. Hikari uses Spring Boot's default connection timeout. Flyway's first migration enables pgvector; future table migrations belong to later phases.
+`application.properties` contains basic shared settings and the `/api/v1` servlet context path. `application-dev.properties` imports `.env`; `application-prod.properties` uses deployment environment variables and Render's `PORT`. The production profile does not import `.env`. Hikari uses Spring Boot's default connection timeout. Flyway enables pgvector, creates the Phase 2 tables, and seeds the sample menu. Both profiles use `ddl-auto=validate`: Hibernate validates the schema and Flyway changes it.
 
-Code follows packages by layer: `controller` handles HTTP requests, `service` performs database checks, `dto` defines response data, `config` configures CORS, and `util` contains the explicit model smoke runner. Lombok generates dependency constructors, configuration accessors, and the smoke runner's logger.
+Code follows packages by layer: `controller`, `service`, `dto`, `entity`, `repository`, `advice`, `exception`, `config`, and `util`. Services have interfaces and matching `*ServiceImpl` classes in `service`. DTO names end in `Dto`; DTOs and API envelopes use Lombok classes instead of records. Keep one blank line between DTO/entity fields. Lombok generates dependency constructors, accessors, and SLF4J loggers. Every service implementation logs useful operations and failures without logging session tokens or credentials. Normal operations use INFO, detailed validation/read activity uses DEBUG, and failed database health checks use WARN. To see service DEBUG logs locally, set `logging.level.com.rutikrokade.projects.aicartapp.service=DEBUG` in `application-dev.properties`.
 
 ## Run and verify locally
 
@@ -48,7 +48,7 @@ For IntelliJ, run `AicartappApplication` with the working directory set to the p
 java -jar target/aicartapp-0.0.1-SNAPSHOT.jar
 ```
 
-The JAR also loads `.env` when started in the project root with the default `dev` profile. For production, select `prod` and provide real environment variables. On macOS or Linux, use `./mvnw` instead. `GET /api/v1/health` returns `{"status":"UP"}` with HTTP 200 when a database connection is valid, or `{"status":"DOWN"}` with HTTP 503 when it is not. It does not call Gemini. The endpoint is intended for the frontend's backend status display and Render's HTTP health check.
+The JAR also loads `.env` when started in the project root with the default `dev` profile. For production, select `prod` and provide real environment variables. On macOS or Linux, use `./mvnw` instead. `GET /api/v1/health` returns the shared envelope with `data.status = "UP"` and HTTP 200 when a database connection is valid, or `data.status = "DOWN"` and HTTP 503 when it is not. It does not call Gemini. Render checks the HTTP status; the frontend must now read `response.data.status` instead of the former top-level `response.status` (for Axios, use `response.data.data.status`).
 
 Run the model checks explicitly, only after the database and API key are configured:
 
@@ -73,3 +73,85 @@ For this Docker example, fill in the existing `.env` and set `FRONTEND_ORIGIN` t
 Create a Render **Web Service** from this repository using the Docker runtime and the main branch. Set `SPRING_PROFILES_ACTIVE=prod`, the five required connection/origin variables, and HTTP health check path `/api/v1/health`. Render supplies `PORT`. The backend API base URL is `https://<service-name>.onrender.com/api/v1`; provide that URL to the frontend. Set `FRONTEND_ORIGIN` to the exact deployed frontend origin without a trailing slash. Deploy the frontend independently and verify a browser request to `/api/v1/health` from that origin.
 
 The standard Maven test command does not require live credentials. Docker packages with tests skipped; run `.\mvnw.cmd test` before deploying. The live database and Gemini checks are explicit verification steps, not build steps.
+
+## Phase 2 API
+
+Successful JSON responses use `{"timestamp":"<UTC instant>","data":{...},"error":null}`. Errors use `{"timestamp":"<UTC instant>","data":null,"error":{"status":400,"code":"VALIDATION_ERROR","message":"Request validation failed","errors":[{"field":"quantity","message":"Quantity must be between 0 and 20"}]}}`. HTTP status codes are preserved. HTTP 204 has an empty body.
+
+| Method and path | Input | Result |
+| --- | --- | --- |
+| `POST /api/v1/sessions` | No body or session header | 201; `data.sessionId` and `data.expiresAt` |
+| `GET /api/v1/cart` | `X-Session-Id` | 200; current cart |
+| `PUT /api/v1/cart/items/{itemId}` | `X-Session-Id`, JSON `{"quantity":2}` | 200; updated cart |
+| `DELETE /api/v1/sessions/current` | `X-Session-Id` | 204; session and its cart removed |
+
+Session IDs look like `SESSION_<random UUID>`, and cart IDs like `CART_<random UUID>`. A session owns exactly one cart, created in the same transaction, and expires 24 hours after creation without extending on requests. Send the session ID only in `X-Session-Id`, not in URLs or logs. Store it in the frontend's `sessionStorage` when integrating session support.
+
+`PUT` sets an absolute quantity from 0 through 20; zero removes the item. Sending the same quantity again does not increment it. Missing/null, fractional, string, negative, and excessive quantities are rejected. Only the database supplies prices and totals. An empty cart has `items: []`, `total: 0.00`, and `currency: "INR"`.
+
+Example cart data inside the response envelope:
+
+```json
+{
+  "cartId": "CART_01234567-89ab-4cde-8f01-23456789abcd",
+  "items": [{
+    "itemId": 1,
+    "name": "Paneer Butter Masala",
+    "quantity": 2,
+    "unitPrice": 250.00,
+    "lineTotal": 500.00,
+    "available": true
+  }],
+  "total": 500.00,
+  "currency": "INR"
+}
+```
+
+Missing, malformed, unknown, and deleted session tokens return 401 with `INVALID_SESSION`; expired tokens return 401 with `SESSION_EXPIRED`. Unknown dishes return 404 `ITEM_NOT_FOUND`. Positive quantities for unavailable dishes return 409 `ITEM_UNAVAILABLE`. Existing unavailable dishes remain visible, use current database prices in totals, and can be removed. Removing a known dish already absent from the cart succeeds. Periodic expiry cleanup is scheduled for Phase 8.
+
+Sample dishes are seeded by Flyway in both development and production. Menu IDs use Java `Long` and PostgreSQL `BIGINT GENERATED BY DEFAULT AS IDENTITY`, mapped with `@GeneratedValue(strategy = GenerationType.IDENTITY)`. New menu items receive IDs from the database; callers must treat IDs as opaque values rather than assuming they are contiguous. There is no menu-list endpoint in Phase 2; use these sample IDs for manual checks:
+
+| Item ID | Dish | INR | Available |
+| --- | --- | ---: | --- |
+| `1` | Paneer Butter Masala | 250.00 | Yes |
+| `2` | Dal Tadka | 180.50 | Yes |
+| `3` | Chicken Biryani | 320.00 | Yes |
+| `4` | Vegetable Pulao | 160.00 | Yes |
+| `5` | Butter Naan | 45.00 | Yes |
+| `6` | Gulab Jamun | 90.00 | No |
+
+Run the backend normally to apply pending migrations to the application schema. V2 and V3 remain unchanged for databases that have already applied them. V4 converts menu UUIDs to numeric IDs, updates existing cart references, preserves custom menu items, and advances the identity sequence past all migrated IDs. On a fresh database, Flyway applies V1 through V4 in order. Do not edit migrations after they have been applied; use a new migration for subsequent changes.
+
+After V4, clients must send positive numeric menu IDs (for example, `PUT /api/v1/cart/items/1`). Cart response `itemId` values are JSON numbers; former menu UUID paths now return 400. Session and cart IDs retain their `SESSION_`/`CART_` format. Numeric IDs are identifiers, not authorization credentials; session validation still determines which cart can be changed.
+
+### Manual checks in PowerShell
+
+```powershell
+$api = 'http://localhost:8080/api/v1'
+$sessionA = (Invoke-RestMethod -Method Post "$api/sessions").data
+$sessionB = (Invoke-RestMethod -Method Post "$api/sessions").data
+$headersA = @{ 'X-Session-Id' = $sessionA.sessionId }
+$headersB = @{ 'X-Session-Id' = $sessionB.sessionId }
+$dishId = 1
+
+# A: two paneer dishes, total INR 500.00; repeat to confirm quantity stays two.
+Invoke-RestMethod -Method Put "$api/cart/items/$dishId" -Headers $headersA -ContentType 'application/json' -Body '{"quantity":2}'
+Invoke-RestMethod -Method Put "$api/cart/items/$dishId" -Headers $headersA -ContentType 'application/json' -Body '{"quantity":2}'
+
+# B must remain empty.
+Invoke-RestMethod "$api/cart" -Headers $headersB
+
+# Remove from A; then end A. Further requests with A's token must return 401.
+Invoke-RestMethod -Method Put "$api/cart/items/$dishId" -Headers $headersA -ContentType 'application/json' -Body '{"quantity":0}'
+Invoke-RestMethod -Method Delete "$api/sessions/current" -Headers $headersA
+```
+
+### Automated database checks
+
+Normal tests (`.\mvnw.cmd test`) exercise HTTP contracts, input validation, session logic, and existing Phase 1 behavior without calling Neon or Gemini. To include PostgreSQL integration checks explicitly:
+
+```powershell
+.\mvnw.cmd -Pdatabase-tests test
+```
+
+This uses the same `DB_JDBC_URL`, `DB_USERNAME`, and `DB_PASSWORD` from environment variables or `.env`. The database user must be able to create a schema. Each run creates a random `phase2_test_<UUID>` schema, applies V1-V3 and inserts a legacy cart/custom dish, then starts the application to apply V4. It checks preservation of existing data, generated menu IDs, mapping/constraints/cart isolation/concurrency/expiry/deletion/restart persistence, then drops only that test schema. Application tables are not reset or modified, and no Gemini requests are made. If the test process is forcibly terminated, its temporary schema may remain; remove only the corresponding `phase2_test_...` schema after confirming no test is running. Final application-data cleanup is a separate operation.

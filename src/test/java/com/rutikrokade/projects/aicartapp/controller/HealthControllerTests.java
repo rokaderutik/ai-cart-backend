@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 
 import com.rutikrokade.projects.aicartapp.config.CorsConfig;
-import com.rutikrokade.projects.aicartapp.service.HealthService;
+import com.rutikrokade.projects.aicartapp.service.HealthServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -27,7 +27,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @WebMvcTest(controllers = HealthController.class,
         properties = "FRONTEND_ORIGIN=https://ai-cart.example")
 @ActiveProfiles("dev")
-@Import({CorsConfig.class, HealthService.class})
+@Import({CorsConfig.class, HealthServiceImpl.class})
 class HealthControllerTests {
 
     @Autowired
@@ -44,7 +44,7 @@ class HealthControllerTests {
 
         mockMvc.perform(get("/api/v1/health").contextPath("/api/v1"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.status").value("UP"));
+                .andExpect(jsonPath("$.data.status").value("UP"));
     }
 
     @Test
@@ -53,7 +53,7 @@ class HealthControllerTests {
 
         mockMvc.perform(get("/api/v1/health").contextPath("/api/v1"))
                 .andExpect(status().isServiceUnavailable())
-                .andExpect(jsonPath("$.status").value("DOWN"));
+                .andExpect(jsonPath("$.data.status").value("DOWN"));
     }
 
     @ParameterizedTest
