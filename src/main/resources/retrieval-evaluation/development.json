@@ -1,0 +1,627 @@
+[
+  {
+    "id": "dev-01",
+    "group": "semantic",
+    "request": {
+      "target": "MENU",
+      "query": "A creamy tomato curry with paneer and butter"
+    },
+    "menuSources": [
+      "menu:paneer-butter-masala"
+    ],
+    "guideSources": [],
+    "menuOutcome": "EVIDENCE_FOUND",
+    "guideOutcome": null,
+    "unrelated": false,
+    "factSupported": true,
+    "note": ""
+  },
+  {
+    "id": "dev-02",
+    "group": "semantic",
+    "request": {
+      "target": "MENU",
+      "query": "Smoky roasted aubergine mashed with green chillies"
+    },
+    "menuSources": [
+      "menu:baingan-bharta"
+    ],
+    "guideSources": [],
+    "menuOutcome": "EVIDENCE_FOUND",
+    "guideOutcome": null,
+    "unrelated": false,
+    "factSupported": true,
+    "note": ""
+  },
+  {
+    "id": "dev-03",
+    "group": "semantic",
+    "request": {
+      "target": "MENU",
+      "query": "A light fresh cucumber tomato salad with lemon"
+    },
+    "menuSources": [
+      "menu:kachumber-salad"
+    ],
+    "guideSources": [],
+    "menuOutcome": "EVIDENCE_FOUND",
+    "guideOutcome": null,
+    "unrelated": false,
+    "factSupported": true,
+    "note": ""
+  },
+  {
+    "id": "dev-04",
+    "group": "semantic",
+    "request": {
+      "target": "MENU",
+      "query": "Warm comforting slow cooked black lentils with butter and cream"
+    },
+    "menuSources": [
+      "menu:dal-makhani"
+    ],
+    "guideSources": [],
+    "menuOutcome": "EVIDENCE_FOUND",
+    "guideOutcome": null,
+    "unrelated": false,
+    "factSupported": true,
+    "note": ""
+  },
+  {
+    "id": "dev-05",
+    "group": "semantic",
+    "request": {
+      "target": "MENU",
+      "query": "Flaky layered whole wheat bread cooked with ghee"
+    },
+    "menuSources": [
+      "menu:lachha-paratha"
+    ],
+    "guideSources": [],
+    "menuOutcome": "EVIDENCE_FOUND",
+    "guideOutcome": null,
+    "unrelated": false,
+    "factSupported": true,
+    "note": ""
+  },
+  {
+    "id": "dev-06",
+    "group": "semantic",
+    "request": {
+      "target": "MENU",
+      "query": "Crispy onion fritters in chickpea batter"
+    },
+    "menuSources": [
+      "menu:onion-pakora"
+    ],
+    "guideSources": [],
+    "menuOutcome": "EVIDENCE_FOUND",
+    "guideOutcome": null,
+    "unrelated": false,
+    "factSupported": true,
+    "note": ""
+  },
+  {
+    "id": "dev-07",
+    "group": "semantic",
+    "request": {
+      "target": "MENU",
+      "query": "A chilled thick mango yogurt drink"
+    },
+    "menuSources": [
+      "menu:mango-lassi"
+    ],
+    "guideSources": [],
+    "menuOutcome": "EVIDENCE_FOUND",
+    "guideOutcome": null,
+    "unrelated": false,
+    "factSupported": true,
+    "note": ""
+  },
+  {
+    "id": "dev-08",
+    "group": "semantic",
+    "request": {
+      "target": "MENU",
+      "query": "Tangy fish with tamarind and coconut gravy"
+    },
+    "menuSources": [
+      "menu:fish-curry"
+    ],
+    "guideSources": [],
+    "menuOutcome": "EVIDENCE_FOUND",
+    "guideOutcome": null,
+    "unrelated": false,
+    "factSupported": true,
+    "note": ""
+  },
+  {
+    "id": "dev-09",
+    "group": "filters",
+    "request": {
+      "target": "MENU",
+      "query": "Creamy mild vegetarian main",
+      "filters": {
+        "maxPrice": 250,
+        "dietaryTags": [
+          "VEGETARIAN"
+        ],
+        "categories": [
+          "MAIN"
+        ],
+        "maxSpiceLevel": 1
+      }
+    },
+    "menuSources": [
+      "menu:paneer-butter-masala",
+      "menu:dal-makhani"
+    ],
+    "guideSources": [],
+    "menuOutcome": "EVIDENCE_FOUND",
+    "guideOutcome": null,
+    "unrelated": false,
+    "factSupported": true,
+    "note": ""
+  },
+  {
+    "id": "dev-10",
+    "group": "filters",
+    "request": {
+      "target": "MENU",
+      "query": "A mild vegan rice dish",
+      "filters": {
+        "maxPrice": 160,
+        "dietaryTags": [
+          "VEGAN"
+        ],
+        "categories": [
+          "RICE"
+        ],
+        "maxSpiceLevel": 1
+      }
+    },
+    "menuSources": [
+      "menu:vegetable-pulao",
+      "menu:lemon-rice",
+      "menu:steamed-rice"
+    ],
+    "guideSources": [],
+    "menuOutcome": "EVIDENCE_FOUND",
+    "guideOutcome": null,
+    "unrelated": false,
+    "factSupported": true,
+    "note": ""
+  },
+  {
+    "id": "dev-11",
+    "group": "filters",
+    "request": {
+      "target": "MENU",
+      "query": "Extremely spicy coconut vegetable curry",
+      "filters": {
+        "dietaryTags": [
+          "VEGAN"
+        ],
+        "categories": [
+          "MAIN"
+        ],
+        "minSpiceLevel": 5,
+        "maxSpiceLevel": 5
+      }
+    },
+    "menuSources": [
+      "menu:vegetable-kolhapuri"
+    ],
+    "guideSources": [],
+    "menuOutcome": "EVIDENCE_FOUND",
+    "guideOutcome": null,
+    "unrelated": false,
+    "factSupported": true,
+    "note": ""
+  },
+  {
+    "id": "dev-12",
+    "group": "filters",
+    "request": {
+      "target": "MENU",
+      "query": "Unbuttered whole wheat tandoor bread",
+      "filters": {
+        "maxPrice": 30,
+        "categories": [
+          "BREAD"
+        ],
+        "dietaryTags": [
+          "VEGAN"
+        ],
+        "maxSpiceLevel": 0
+      }
+    },
+    "menuSources": [
+      "menu:tandoori-roti"
+    ],
+    "guideSources": [],
+    "menuOutcome": "EVIDENCE_FOUND",
+    "guideOutcome": null,
+    "unrelated": false,
+    "factSupported": true,
+    "note": ""
+  },
+  {
+    "id": "dev-13",
+    "group": "filters",
+    "request": {
+      "target": "MENU",
+      "query": "Milk dumplings in cardamom syrup",
+      "filters": {
+        "categories": [
+          "DESSERT"
+        ],
+        "maxPrice": 90,
+        "availableOnly": true
+      }
+    },
+    "menuSources": [],
+    "guideSources": [],
+    "menuOutcome": "NO_ELIGIBLE_ITEMS",
+    "guideOutcome": null,
+    "unrelated": false,
+    "factSupported": false,
+    "note": "Only matching priced dessert is unavailable. Do not relax availability."
+  },
+  {
+    "id": "dev-14",
+    "group": "filters",
+    "request": {
+      "target": "MENU",
+      "query": "Milk dumplings in cardamom syrup",
+      "filters": {
+        "categories": [
+          "DESSERT"
+        ],
+        "maxPrice": 90,
+        "availableOnly": false
+      }
+    },
+    "menuSources": [
+      "menu:gulab-jamun"
+    ],
+    "guideSources": [],
+    "menuOutcome": "EVIDENCE_FOUND",
+    "guideOutcome": null,
+    "unrelated": false,
+    "factSupported": true,
+    "note": ""
+  },
+  {
+    "id": "dev-15",
+    "group": "filters",
+    "request": {
+      "target": "MENU",
+      "query": "Creamy mild chicken curry",
+      "filters": {
+        "dietaryTags": [
+          "NON_VEGETARIAN"
+        ],
+        "maxSpiceLevel": 1,
+        "maxPrice": 330
+      }
+    },
+    "menuSources": [
+      "menu:butter-chicken"
+    ],
+    "guideSources": [],
+    "menuOutcome": "EVIDENCE_FOUND",
+    "guideOutcome": null,
+    "unrelated": false,
+    "factSupported": true,
+    "note": ""
+  },
+  {
+    "id": "dev-16",
+    "group": "filters",
+    "request": {
+      "target": "MENU",
+      "query": "Vegetarian main under twenty rupees",
+      "filters": {
+        "categories": [
+          "MAIN"
+        ],
+        "dietaryTags": [
+          "VEGETARIAN"
+        ],
+        "maxPrice": 20
+      }
+    },
+    "menuSources": [],
+    "guideSources": [],
+    "menuOutcome": "NO_ELIGIBLE_ITEMS",
+    "guideOutcome": null,
+    "unrelated": false,
+    "factSupported": false,
+    "note": ""
+  },
+  {
+    "id": "dev-17",
+    "group": "guide",
+    "request": {
+      "target": "GUIDE",
+      "query": "What does spice level 0 through 5 mean?"
+    },
+    "menuSources": [],
+    "guideSources": [
+      "guide:spice-preferences"
+    ],
+    "menuOutcome": null,
+    "guideOutcome": "EVIDENCE_FOUND",
+    "unrelated": false,
+    "factSupported": true,
+    "note": ""
+  },
+  {
+    "id": "dev-18",
+    "group": "guide",
+    "request": {
+      "target": "GUIDE",
+      "query": "Can I request less chilli or remove a garnish from my dish?"
+    },
+    "menuSources": [],
+    "guideSources": [
+      "guide:customization"
+    ],
+    "menuOutcome": null,
+    "guideOutcome": "EVIDENCE_FOUND",
+    "unrelated": false,
+    "factSupported": true,
+    "note": ""
+  },
+  {
+    "id": "dev-19",
+    "group": "guide",
+    "request": {
+      "target": "GUIDE",
+      "query": "Are your dishes guaranteed safe for a nut allergy?"
+    },
+    "menuSources": [],
+    "guideSources": [
+      "guide:allergens"
+    ],
+    "menuOutcome": null,
+    "guideOutcome": "EVIDENCE_FOUND",
+    "unrelated": false,
+    "factSupported": true,
+    "note": "Evidence supports limitations, never a safety guarantee."
+  },
+  {
+    "id": "dev-20",
+    "group": "guide",
+    "request": {
+      "target": "GUIDE",
+      "query": "Does adding food to my cart place and pay for an order?"
+    },
+    "menuSources": [],
+    "guideSources": [
+      "guide:ordering-cart"
+    ],
+    "menuOutcome": null,
+    "guideOutcome": "EVIDENCE_FOUND",
+    "unrelated": false,
+    "factSupported": true,
+    "note": ""
+  },
+  {
+    "id": "dev-21",
+    "group": "guide",
+    "request": {
+      "target": "GUIDE",
+      "query": "What are your takeaway packaging arrangements?"
+    },
+    "menuSources": [],
+    "guideSources": [
+      "guide:takeaway"
+    ],
+    "menuOutcome": null,
+    "guideOutcome": "EVIDENCE_FOUND",
+    "unrelated": false,
+    "factSupported": true,
+    "note": ""
+  },
+  {
+    "id": "dev-22",
+    "group": "mixed",
+    "request": {
+      "target": "BOTH",
+      "query": "Suggest mild vegetarian food under 300 and explain removal of cream",
+      "filters": {
+        "categories": [
+          "MAIN"
+        ],
+        "dietaryTags": [
+          "VEGETARIAN"
+        ],
+        "maxPrice": 300,
+        "maxSpiceLevel": 1
+      },
+      "menuQuery": "Creamy mild vegetarian main",
+      "guideQuery": "Can cream be removed from a dish as a customization?"
+    },
+    "menuSources": [
+      "menu:paneer-butter-masala",
+      "menu:malai-kofta"
+    ],
+    "guideSources": [
+      "guide:customization"
+    ],
+    "menuOutcome": "EVIDENCE_FOUND",
+    "guideOutcome": "EVIDENCE_FOUND",
+    "unrelated": false,
+    "factSupported": true,
+    "note": ""
+  },
+  {
+    "id": "dev-23",
+    "group": "mixed",
+    "request": {
+      "target": "BOTH",
+      "query": "Suggest grilled paneer and explain portions",
+      "filters": {
+        "categories": [
+          "STARTER"
+        ],
+        "dietaryTags": [
+          "VEGETARIAN"
+        ]
+      },
+      "menuQuery": "Grilled smoky paneer starter",
+      "guideQuery": "How big are starter servings and can they be shared?"
+    },
+    "menuSources": [
+      "menu:paneer-tikka"
+    ],
+    "guideSources": [
+      "guide:serving-sizes"
+    ],
+    "menuOutcome": "EVIDENCE_FOUND",
+    "guideOutcome": "EVIDENCE_FOUND",
+    "unrelated": false,
+    "factSupported": true,
+    "note": ""
+  },
+  {
+    "id": "dev-24",
+    "group": "mixed",
+    "request": {
+      "target": "BOTH",
+      "query": "Find a vegan main under 20 and explain the spice scale",
+      "filters": {
+        "categories": [
+          "MAIN"
+        ],
+        "dietaryTags": [
+          "VEGAN"
+        ],
+        "maxPrice": 20
+      },
+      "menuQuery": "Vegan main",
+      "guideQuery": "Explain the menu spice scale"
+    },
+    "menuSources": [],
+    "guideSources": [
+      "guide:spice-preferences"
+    ],
+    "menuOutcome": "NO_ELIGIBLE_ITEMS",
+    "guideOutcome": "EVIDENCE_FOUND",
+    "unrelated": false,
+    "factSupported": false,
+    "note": "Partial evidence: guide is useful even when no eligible menu item exists."
+  },
+  {
+    "id": "dev-25",
+    "group": "mixed",
+    "request": {
+      "target": "BOTH",
+      "query": "Suggest a rice dish for takeaway",
+      "filters": {
+        "categories": [
+          "RICE"
+        ],
+        "maxSpiceLevel": 1
+      },
+      "menuQuery": "Mild vegetable basmati rice",
+      "guideQuery": "Can I arrange takeaway collection and packaging?"
+    },
+    "menuSources": [
+      "menu:vegetable-pulao"
+    ],
+    "guideSources": [
+      "guide:takeaway"
+    ],
+    "menuOutcome": "EVIDENCE_FOUND",
+    "guideOutcome": "EVIDENCE_FOUND",
+    "unrelated": false,
+    "factSupported": true,
+    "note": ""
+  },
+  {
+    "id": "dev-26",
+    "group": "unsupported",
+    "request": {
+      "target": "GUIDE",
+      "query": "What are the restaurant's opening hours?"
+    },
+    "menuSources": [],
+    "guideSources": [
+      "guide:restaurant-overview"
+    ],
+    "menuOutcome": null,
+    "guideOutcome": "EVIDENCE_FOUND",
+    "unrelated": false,
+    "factSupported": false,
+    "note": "Overview explicitly says hours are not established."
+  },
+  {
+    "id": "dev-27",
+    "group": "unsupported",
+    "request": {
+      "target": "BOTH",
+      "query": "How many calories are in Paneer Butter Masala?",
+      "menuQuery": "Paneer Butter Masala ingredients",
+      "guideQuery": "Are exact calories and nutritional serving measurements provided?"
+    },
+    "menuSources": [
+      "menu:paneer-butter-masala"
+    ],
+    "guideSources": [
+      "guide:serving-sizes"
+    ],
+    "menuOutcome": "EVIDENCE_FOUND",
+    "guideOutcome": "EVIDENCE_FOUND",
+    "unrelated": false,
+    "factSupported": false,
+    "note": "Related evidence is expected; calorie numbers are absent."
+  },
+  {
+    "id": "dev-28",
+    "group": "unrelated",
+    "request": {
+      "target": "BOTH",
+      "query": "Explain the formation of black holes"
+    },
+    "menuSources": [],
+    "guideSources": [],
+    "menuOutcome": "NO_RELEVANT_EVIDENCE",
+    "guideOutcome": "NO_RELEVANT_EVIDENCE",
+    "unrelated": true,
+    "factSupported": false,
+    "note": ""
+  },
+  {
+    "id": "dev-29",
+    "group": "unrelated",
+    "request": {
+      "target": "BOTH",
+      "query": "Who won yesterday's international cricket match?"
+    },
+    "menuSources": [],
+    "guideSources": [],
+    "menuOutcome": "NO_RELEVANT_EVIDENCE",
+    "guideOutcome": "NO_RELEVANT_EVIDENCE",
+    "unrelated": true,
+    "factSupported": false,
+    "note": ""
+  },
+  {
+    "id": "dev-30",
+    "group": "unrelated",
+    "request": {
+      "target": "BOTH",
+      "query": "Write Python code to sort an array using merge sort"
+    },
+    "menuSources": [],
+    "guideSources": [],
+    "menuOutcome": "NO_RELEVANT_EVIDENCE",
+    "guideOutcome": "NO_RELEVANT_EVIDENCE",
+    "unrelated": true,
+    "factSupported": false,
+    "note": ""
+  }
+]

@@ -8,7 +8,7 @@ public class AicartappApplication {
 
 	public static void main(String[] args) {
 		var context = SpringApplication.run(AicartappApplication.class, args);
-		if (context.getEnvironment().acceptsProfiles(org.springframework.core.env.Profiles.of("ingest", "knowledge-smoke"))) {
+		if (context.getEnvironment().acceptsProfiles(org.springframework.core.env.Profiles.of("ingest", "knowledge-smoke", "retrieval-eval"))) {
 			System.exit(SpringApplication.exit(context));
 		}
 	}

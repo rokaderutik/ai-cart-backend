@@ -4,6 +4,8 @@ Spring Boot API for the restaurant RAG application. Phase 1 is deployed and conn
 
 Phase 3 adds validated menu/guide sources, repeatable embedding ingestion, stable source IDs, and atomic knowledge-base updates. See [the Phase 3 ingestion guide](docs/phase-3.md) for source review, dry-run/apply commands, and tests. Normal startup does not ingest content.
 
+Phase 4 adds exact database filters, separate menu/guide retrieval, explicit empty/partial evidence outcomes, and a development inspection API. See [the Phase 4 retrieval guide](docs/phase-4.md) for Postman examples, the IntelliJ evaluation configuration, and measured development results. Automatic question interpretation and generated chat answers belong to Phase 5.
+
 ## Requirements
 
 - Java 21 for local development

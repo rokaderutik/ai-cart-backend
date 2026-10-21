@@ -1,0 +1,418 @@
+[
+  {
+    "id": "held-01",
+    "group": "semantic",
+    "request": {
+      "target": "MENU",
+      "query": "A bright lemon rice with crunchy peanuts"
+    },
+    "menuSources": [
+      "menu:lemon-rice"
+    ],
+    "guideSources": [],
+    "menuOutcome": "EVIDENCE_FOUND",
+    "guideOutcome": null,
+    "unrelated": false,
+    "factSupported": true,
+    "note": ""
+  },
+  {
+    "id": "held-02",
+    "group": "semantic",
+    "request": {
+      "target": "MENU",
+      "query": "Potato and paneer dumplings with cashew cream sauce"
+    },
+    "menuSources": [
+      "menu:malai-kofta"
+    ],
+    "guideSources": [],
+    "menuOutcome": "EVIDENCE_FOUND",
+    "guideOutcome": null,
+    "unrelated": false,
+    "factSupported": true,
+    "note": ""
+  },
+  {
+    "id": "held-03",
+    "group": "semantic",
+    "request": {
+      "target": "MENU",
+      "query": "Chilled cucumber and cumin yogurt side"
+    },
+    "menuSources": [
+      "menu:cucumber-raita"
+    ],
+    "guideSources": [],
+    "menuOutcome": "EVIDENCE_FOUND",
+    "guideOutcome": null,
+    "unrelated": false,
+    "factSupported": true,
+    "note": ""
+  },
+  {
+    "id": "held-04",
+    "group": "semantic",
+    "request": {
+      "target": "MENU",
+      "query": "Milk tea scented with ginger and cardamom"
+    },
+    "menuSources": [
+      "menu:masala-chai"
+    ],
+    "guideSources": [],
+    "menuOutcome": "EVIDENCE_FOUND",
+    "guideOutcome": null,
+    "unrelated": false,
+    "factSupported": true,
+    "note": ""
+  },
+  {
+    "id": "held-05",
+    "group": "semantic",
+    "request": {
+      "target": "MENU",
+      "query": "Smoky boneless chicken pieces grilled after yogurt marination"
+    },
+    "menuSources": [
+      "menu:chicken-tikka"
+    ],
+    "guideSources": [],
+    "menuOutcome": "EVIDENCE_FOUND",
+    "guideOutcome": null,
+    "unrelated": false,
+    "factSupported": true,
+    "note": ""
+  },
+  {
+    "id": "held-06",
+    "group": "filters",
+    "request": {
+      "target": "MENU",
+      "query": "Lentils with cumin garlic tempering",
+      "filters": {
+        "maxPrice": 180.5,
+        "categories": [
+          "MAIN"
+        ],
+        "dietaryTags": [
+          "VEGETARIAN"
+        ],
+        "minSpiceLevel": 2,
+        "maxSpiceLevel": 2
+      }
+    },
+    "menuSources": [
+      "menu:dal-tadka"
+    ],
+    "guideSources": [],
+    "menuOutcome": "EVIDENCE_FOUND",
+    "guideOutcome": null,
+    "unrelated": false,
+    "factSupported": true,
+    "note": ""
+  },
+  {
+    "id": "held-07",
+    "group": "filters",
+    "request": {
+      "target": "MENU",
+      "query": "No chilli vegan rice",
+      "filters": {
+        "categories": [
+          "RICE"
+        ],
+        "dietaryTags": [
+          "VEGAN"
+        ],
+        "minSpiceLevel": 0,
+        "maxSpiceLevel": 0
+      }
+    },
+    "menuSources": [
+      "menu:steamed-rice"
+    ],
+    "guideSources": [],
+    "menuOutcome": "EVIDENCE_FOUND",
+    "guideOutcome": null,
+    "unrelated": false,
+    "factSupported": true,
+    "note": ""
+  },
+  {
+    "id": "held-08",
+    "group": "filters",
+    "request": {
+      "target": "MENU",
+      "query": "A refreshing fizzy vegan drink",
+      "filters": {
+        "categories": [
+          "DRINK"
+        ],
+        "dietaryTags": [
+          "VEGETARIAN",
+          "VEGAN"
+        ],
+        "maxPrice": 80
+      }
+    },
+    "menuSources": [
+      "menu:fresh-lime-soda"
+    ],
+    "guideSources": [],
+    "menuOutcome": "EVIDENCE_FOUND",
+    "guideOutcome": null,
+    "unrelated": false,
+    "factSupported": true,
+    "note": ""
+  },
+  {
+    "id": "held-09",
+    "group": "filters",
+    "request": {
+      "target": "MENU",
+      "query": "A very spicy mushroom main",
+      "filters": {
+        "categories": [
+          "MAIN"
+        ],
+        "minSpiceLevel": 4,
+        "maxSpiceLevel": 4,
+        "dietaryTags": [
+          "VEGAN"
+        ]
+      }
+    },
+    "menuSources": [
+      "menu:mushroom-pepper-fry"
+    ],
+    "guideSources": [],
+    "menuOutcome": "EVIDENCE_FOUND",
+    "guideOutcome": null,
+    "unrelated": false,
+    "factSupported": true,
+    "note": ""
+  },
+  {
+    "id": "held-10",
+    "group": "filters",
+    "request": {
+      "target": "MENU",
+      "query": "Dessert below fifty rupees",
+      "filters": {
+        "categories": [
+          "DESSERT"
+        ],
+        "maxPrice": 50
+      }
+    },
+    "menuSources": [],
+    "guideSources": [],
+    "menuOutcome": "NO_ELIGIBLE_ITEMS",
+    "guideOutcome": null,
+    "unrelated": false,
+    "factSupported": false,
+    "note": ""
+  },
+  {
+    "id": "held-11",
+    "group": "guide",
+    "request": {
+      "target": "GUIDE",
+      "query": "Does vegan mean certified allergy safe?"
+    },
+    "menuSources": [],
+    "guideSources": [
+      "guide:allergens"
+    ],
+    "menuOutcome": null,
+    "guideOutcome": "EVIDENCE_FOUND",
+    "unrelated": false,
+    "factSupported": true,
+    "note": ""
+  },
+  {
+    "id": "held-12",
+    "group": "guide",
+    "request": {
+      "target": "GUIDE",
+      "query": "How long does my guest session last and what does its cart do?"
+    },
+    "menuSources": [],
+    "guideSources": [
+      "guide:ordering-cart"
+    ],
+    "menuOutcome": null,
+    "guideOutcome": "EVIDENCE_FOUND",
+    "unrelated": false,
+    "factSupported": true,
+    "note": ""
+  },
+  {
+    "id": "held-13",
+    "group": "guide",
+    "request": {
+      "target": "GUIDE",
+      "query": "Can you guarantee when my food will be ready?"
+    },
+    "menuSources": [],
+    "guideSources": [
+      "guide:preparation"
+    ],
+    "menuOutcome": null,
+    "guideOutcome": "EVIDENCE_FOUND",
+    "unrelated": false,
+    "factSupported": false,
+    "note": ""
+  },
+  {
+    "id": "held-14",
+    "group": "mixed",
+    "request": {
+      "target": "BOTH",
+      "query": "Find spicy chickpeas and explain how spicy level three is",
+      "filters": {
+        "dietaryTags": [
+          "VEGAN"
+        ],
+        "categories": [
+          "MAIN"
+        ],
+        "minSpiceLevel": 3,
+        "maxSpiceLevel": 3
+      },
+      "menuQuery": "Tangy chickpeas tomato onion sauce",
+      "guideQuery": "What does spice level three mean?"
+    },
+    "menuSources": [
+      "menu:chana-masala"
+    ],
+    "guideSources": [
+      "guide:spice-preferences"
+    ],
+    "menuOutcome": "EVIDENCE_FOUND",
+    "guideOutcome": "EVIDENCE_FOUND",
+    "unrelated": false,
+    "factSupported": true,
+    "note": ""
+  },
+  {
+    "id": "held-15",
+    "group": "mixed",
+    "request": {
+      "target": "BOTH",
+      "query": "Recommend bread and explain how bread portions are counted",
+      "filters": {
+        "categories": [
+          "BREAD"
+        ]
+      },
+      "menuQuery": "Garlic coriander butter tandoor bread",
+      "guideQuery": "Does one bread entry represent one bread?"
+    },
+    "menuSources": [
+      "menu:garlic-naan"
+    ],
+    "guideSources": [
+      "guide:serving-sizes"
+    ],
+    "menuOutcome": "EVIDENCE_FOUND",
+    "guideOutcome": "EVIDENCE_FOUND",
+    "unrelated": false,
+    "factSupported": true,
+    "note": ""
+  },
+  {
+    "id": "held-16",
+    "group": "mixed",
+    "request": {
+      "target": "BOTH",
+      "query": "I want a salad and need to understand cross contact risks",
+      "filters": {
+        "categories": [
+          "SIDE"
+        ],
+        "dietaryTags": [
+          "VEGAN"
+        ]
+      },
+      "menuQuery": "Chopped cucumber tomato lemon salad",
+      "guideQuery": "Are ingredients complete allergen declarations and is cross contact possible?"
+    },
+    "menuSources": [
+      "menu:kachumber-salad"
+    ],
+    "guideSources": [
+      "guide:allergens"
+    ],
+    "menuOutcome": "EVIDENCE_FOUND",
+    "guideOutcome": "EVIDENCE_FOUND",
+    "unrelated": false,
+    "factSupported": true,
+    "note": ""
+  },
+  {
+    "id": "held-17",
+    "group": "unsupported",
+    "request": {
+      "target": "GUIDE",
+      "query": "What street is your restaurant on?"
+    },
+    "menuSources": [],
+    "guideSources": [
+      "guide:restaurant-overview"
+    ],
+    "menuOutcome": null,
+    "guideOutcome": "EVIDENCE_FOUND",
+    "unrelated": false,
+    "factSupported": false,
+    "note": ""
+  },
+  {
+    "id": "held-18",
+    "group": "unsupported",
+    "request": {
+      "target": "GUIDE",
+      "query": "How many minutes will it take to cook my order?"
+    },
+    "menuSources": [],
+    "guideSources": [
+      "guide:preparation"
+    ],
+    "menuOutcome": null,
+    "guideOutcome": "EVIDENCE_FOUND",
+    "unrelated": false,
+    "factSupported": false,
+    "note": ""
+  },
+  {
+    "id": "held-19",
+    "group": "unrelated",
+    "request": {
+      "target": "BOTH",
+      "query": "Help me fix a Java NullPointerException in a shopping cart application"
+    },
+    "menuSources": [],
+    "guideSources": [],
+    "menuOutcome": "NO_RELEVANT_EVIDENCE",
+    "guideOutcome": "NO_RELEVANT_EVIDENCE",
+    "unrelated": true,
+    "factSupported": false,
+    "note": ""
+  },
+  {
+    "id": "held-20",
+    "group": "unrelated",
+    "request": {
+      "target": "BOTH",
+      "query": "What is the weather forecast in Mumbai tomorrow?"
+    },
+    "menuSources": [],
+    "guideSources": [],
+    "menuOutcome": "NO_RELEVANT_EVIDENCE",
+    "guideOutcome": "NO_RELEVANT_EVIDENCE",
+    "unrelated": true,
+    "factSupported": false,
+    "note": ""
+  }
+]
