@@ -193,7 +193,7 @@ class Phase2DatabaseTests {
     void newMenuItemsReceiveDatabaseGeneratedLongIds() {
         MenuItemRepository menu = context.getBean(MenuItemRepository.class);
         MenuItem item = menu.saveAndFlush(new MenuItem(null, "Identity generation test", "Temporary test dish",
-                "MAIN", List.of("rice"), List.of("VEGAN"), 0, new BigDecimal("12.34"), "INR", true));
+                "MAIN", List.of("rice"), List.of("VEGAN"), 0, new BigDecimal("12.34"), "INR", true, null, true));
         try {
             assertThat(item.getId()).isGreaterThan(7L);
             assertThat(menu.findById(item.getId()).orElseThrow().getName()).isEqualTo("Identity generation test");

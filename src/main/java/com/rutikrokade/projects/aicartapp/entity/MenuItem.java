@@ -55,4 +55,10 @@ public class MenuItem {
 
     @Column(nullable = false)
     private boolean available;
+
+    @Column(unique = true, length = 120)
+    private String sourceKey;
+
+    @Column(nullable = false)
+    private boolean sourceActive = true;
 }

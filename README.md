@@ -2,6 +2,8 @@
 
 Spring Boot API for the restaurant RAG application. Phase 1 is deployed and connected. Phase 2 adds anonymous sessions, persistent carts, sample menu data, and a shared API response/error format. See [the Phase 2 implementation plan](docs/phase-2.md).
 
+Phase 3 adds validated menu/guide sources, repeatable embedding ingestion, stable source IDs, and atomic knowledge-base updates. See [the Phase 3 ingestion guide](docs/phase-3.md) for source review, dry-run/apply commands, and tests. Normal startup does not ingest content.
+
 ## Requirements
 
 - Java 21 for local development
@@ -42,6 +44,8 @@ Invoke-RestMethod http://localhost:8080/api/v1/health
 ```
 
 For IntelliJ, run `AicartappApplication` with the working directory set to the project root. The default `dev` profile loads `.env` without an IDE environment plugin. Tests and builds need no live credentials and do not package `.env`:
+
+For normal Run or Debug, select **AI Cart - Backend (dev)** in the IntelliJ toolbar. Shared configurations under `.run/` also provide **AI Cart - Ingest preview**, **AI Cart - Ingest apply**, and **AI Cart - Knowledge smoke**. These tasks finish and exit intentionally; use the backend configuration to keep the HTTP server running. Rerun and Stop buttons are the normal controls for a running process.
 
 ```powershell
 .\mvnw.cmd clean package

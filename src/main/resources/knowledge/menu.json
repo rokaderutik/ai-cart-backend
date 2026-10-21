@@ -1,0 +1,815 @@
+[
+  {
+    "sourceKey": "paneer-butter-masala",
+    "name": "Paneer Butter Masala",
+    "description": "Paneer in a creamy tomato and butter gravy.",
+    "category": "MAIN",
+    "ingredients": [
+      "paneer",
+      "tomato",
+      "butter",
+      "cream"
+    ],
+    "dietaryTags": [
+      "VEGETARIAN"
+    ],
+    "spiceLevel": 1,
+    "price": 250,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "dal-tadka",
+    "name": "Dal Tadka",
+    "description": "Yellow lentils with a cumin and garlic tempering.",
+    "category": "MAIN",
+    "ingredients": [
+      "lentils",
+      "cumin",
+      "garlic",
+      "ghee"
+    ],
+    "dietaryTags": [
+      "VEGETARIAN"
+    ],
+    "spiceLevel": 2,
+    "price": 180.5,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "chicken-biryani",
+    "name": "Chicken Biryani",
+    "description": "Basmati rice layered with spiced chicken.",
+    "category": "MAIN",
+    "ingredients": [
+      "chicken",
+      "basmati rice",
+      "yogurt",
+      "spices"
+    ],
+    "dietaryTags": [],
+    "spiceLevel": 3,
+    "price": 320,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "vegetable-pulao",
+    "name": "Vegetable Pulao",
+    "description": "Mild basmati rice with vegetables and whole spices.",
+    "category": "RICE",
+    "ingredients": [
+      "basmati rice",
+      "carrot",
+      "peas",
+      "oil",
+      "spices"
+    ],
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN"
+    ],
+    "spiceLevel": 1,
+    "price": 160,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "butter-naan",
+    "name": "Butter Naan",
+    "description": "Tandoor-baked wheat bread brushed with butter.",
+    "category": "BREAD",
+    "ingredients": [
+      "wheat flour",
+      "yogurt",
+      "butter"
+    ],
+    "dietaryTags": [
+      "VEGETARIAN"
+    ],
+    "spiceLevel": 0,
+    "price": 45,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "gulab-jamun",
+    "name": "Gulab Jamun",
+    "description": "Milk dumplings soaked in cardamom sugar syrup.",
+    "category": "DESSERT",
+    "ingredients": [
+      "milk solids",
+      "wheat flour",
+      "sugar",
+      "cardamom"
+    ],
+    "dietaryTags": [
+      "VEGETARIAN"
+    ],
+    "spiceLevel": 0,
+    "price": 90,
+    "currency": "INR",
+    "available": false
+  },
+  {
+    "sourceKey": "palak-paneer",
+    "name": "Palak Paneer",
+    "description": "Soft paneer cubes folded into a smooth spinach gravy with garlic and gentle cumin warmth.",
+    "category": "MAIN",
+    "ingredients": [
+      "paneer",
+      "spinach",
+      "garlic",
+      "cream",
+      "cumin"
+    ],
+    "dietaryTags": [
+      "VEGETARIAN"
+    ],
+    "spiceLevel": 1,
+    "price": 260,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "kadai-paneer",
+    "name": "Kadai Paneer",
+    "description": "Paneer and crunchy capsicum in a coarse tomato gravy with roasted coriander and noticeable chilli heat.",
+    "category": "MAIN",
+    "ingredients": [
+      "paneer",
+      "capsicum",
+      "tomato",
+      "onion",
+      "coriander",
+      "chilli",
+      "oil"
+    ],
+    "dietaryTags": [
+      "VEGETARIAN"
+    ],
+    "spiceLevel": 3,
+    "price": 270,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "matar-paneer",
+    "name": "Matar Paneer",
+    "description": "Green peas and paneer simmered in a lightly creamy onion and tomato sauce.",
+    "category": "MAIN",
+    "ingredients": [
+      "paneer",
+      "peas",
+      "onion",
+      "tomato",
+      "cream",
+      "oil"
+    ],
+    "dietaryTags": [
+      "VEGETARIAN"
+    ],
+    "spiceLevel": 2,
+    "price": 240,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "malai-kofta",
+    "name": "Malai Kofta",
+    "description": "Soft potato and paneer dumplings in a rich, mild cashew and cream gravy.",
+    "category": "MAIN",
+    "ingredients": [
+      "potato",
+      "paneer",
+      "cashew",
+      "cream",
+      "tomato",
+      "wheat flour"
+    ],
+    "dietaryTags": [
+      "VEGETARIAN"
+    ],
+    "spiceLevel": 1,
+    "price": 280,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "chana-masala",
+    "name": "Chana Masala",
+    "description": "Tender chickpeas in a tangy tomato and onion sauce with ginger and warming ground spices.",
+    "category": "MAIN",
+    "ingredients": [
+      "chickpeas",
+      "tomato",
+      "onion",
+      "ginger",
+      "oil",
+      "spices"
+    ],
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN"
+    ],
+    "spiceLevel": 3,
+    "price": 190,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "rajma-masala",
+    "name": "Rajma Masala",
+    "description": "Slow-simmered kidney beans in a thick tomato gravy with cumin and medium chilli warmth.",
+    "category": "MAIN",
+    "ingredients": [
+      "kidney beans",
+      "tomato",
+      "onion",
+      "cumin",
+      "chilli",
+      "oil"
+    ],
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN"
+    ],
+    "spiceLevel": 2,
+    "price": 200,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "aloo-gobi",
+    "name": "Aloo Gobi",
+    "description": "Dry-style potato and cauliflower tossed with turmeric, cumin and a modest chilli seasoning.",
+    "category": "MAIN",
+    "ingredients": [
+      "potato",
+      "cauliflower",
+      "turmeric",
+      "cumin",
+      "chilli",
+      "oil"
+    ],
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN"
+    ],
+    "spiceLevel": 2,
+    "price": 180,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "baingan-bharta",
+    "name": "Baingan Bharta",
+    "description": "Smoky roasted aubergine mashed with tomatoes, onions and green chillies.",
+    "category": "MAIN",
+    "ingredients": [
+      "aubergine",
+      "tomato",
+      "onion",
+      "green chilli",
+      "oil"
+    ],
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN"
+    ],
+    "spiceLevel": 3,
+    "price": 210,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "dal-makhani",
+    "name": "Dal Makhani",
+    "description": "Slow-cooked black lentils and kidney beans finished with butter and cream for a velvety, mild dish.",
+    "category": "MAIN",
+    "ingredients": [
+      "black lentils",
+      "kidney beans",
+      "tomato",
+      "butter",
+      "cream"
+    ],
+    "dietaryTags": [
+      "VEGETARIAN"
+    ],
+    "spiceLevel": 1,
+    "price": 230,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "mushroom-pepper-fry",
+    "name": "Mushroom Pepper Fry",
+    "description": "Mushrooms quickly fried with curry leaves, onion and a bold black pepper finish.",
+    "category": "MAIN",
+    "ingredients": [
+      "mushroom",
+      "onion",
+      "black pepper",
+      "curry leaves",
+      "oil"
+    ],
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN"
+    ],
+    "spiceLevel": 4,
+    "price": 220,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "vegetable-kolhapuri",
+    "name": "Vegetable Kolhapuri",
+    "description": "Mixed vegetables in a fiery roasted coconut and red chilli gravy.",
+    "category": "MAIN",
+    "ingredients": [
+      "carrot",
+      "peas",
+      "potato",
+      "cauliflower",
+      "coconut",
+      "red chilli",
+      "oil"
+    ],
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN"
+    ],
+    "spiceLevel": 5,
+    "price": 240,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "butter-chicken",
+    "name": "Butter Chicken",
+    "description": "Tender chicken in a buttery tomato sauce enriched with cream and gentle spices.",
+    "category": "MAIN",
+    "ingredients": [
+      "chicken",
+      "tomato",
+      "butter",
+      "cream",
+      "yogurt",
+      "spices"
+    ],
+    "dietaryTags": [
+      "NON_VEGETARIAN"
+    ],
+    "spiceLevel": 1,
+    "price": 330,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "chicken-tikka-masala",
+    "name": "Chicken Tikka Masala",
+    "description": "Charred yogurt-marinated chicken pieces in a thick onion and tomato masala.",
+    "category": "MAIN",
+    "ingredients": [
+      "chicken",
+      "yogurt",
+      "onion",
+      "tomato",
+      "cream",
+      "spices"
+    ],
+    "dietaryTags": [
+      "NON_VEGETARIAN"
+    ],
+    "spiceLevel": 3,
+    "price": 340,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "chicken-chettinad",
+    "name": "Chicken Chettinad",
+    "description": "Chicken cooked with roasted pepper, fennel and coconut in an intensely spiced southern-style gravy.",
+    "category": "MAIN",
+    "ingredients": [
+      "chicken",
+      "black pepper",
+      "fennel",
+      "coconut",
+      "onion",
+      "red chilli",
+      "oil"
+    ],
+    "dietaryTags": [
+      "NON_VEGETARIAN"
+    ],
+    "spiceLevel": 4,
+    "price": 350,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "fish-curry",
+    "name": "Fish Curry",
+    "description": "Fish pieces gently simmered in a tangy coconut and tamarind gravy.",
+    "category": "MAIN",
+    "ingredients": [
+      "fish",
+      "coconut",
+      "tamarind",
+      "onion",
+      "chilli",
+      "oil"
+    ],
+    "dietaryTags": [
+      "NON_VEGETARIAN"
+    ],
+    "spiceLevel": 3,
+    "price": 360,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "egg-curry",
+    "name": "Egg Curry",
+    "description": "Boiled eggs served in a medium-spiced tomato and onion gravy.",
+    "category": "MAIN",
+    "ingredients": [
+      "egg",
+      "tomato",
+      "onion",
+      "cumin",
+      "oil",
+      "chilli"
+    ],
+    "dietaryTags": [
+      "NON_VEGETARIAN"
+    ],
+    "spiceLevel": 2,
+    "price": 210,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "jeera-rice",
+    "name": "Jeera Rice",
+    "description": "Fluffy basmati rice tossed with cumin seeds and ghee; a gentle accompaniment to curries.",
+    "category": "RICE",
+    "ingredients": [
+      "basmati rice",
+      "cumin",
+      "ghee"
+    ],
+    "dietaryTags": [
+      "VEGETARIAN"
+    ],
+    "spiceLevel": 0,
+    "price": 130,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "steamed-rice",
+    "name": "Steamed Rice",
+    "description": "Plain steamed basmati rice with separate, fluffy grains and no chilli seasoning.",
+    "category": "RICE",
+    "ingredients": [
+      "basmati rice",
+      "water"
+    ],
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN"
+    ],
+    "spiceLevel": 0,
+    "price": 110,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "vegetable-biryani",
+    "name": "Vegetable Biryani",
+    "description": "Fragrant basmati rice layered with vegetables, yogurt and aromatic biryani spices.",
+    "category": "RICE",
+    "ingredients": [
+      "basmati rice",
+      "carrot",
+      "peas",
+      "potato",
+      "yogurt",
+      "spices",
+      "ghee"
+    ],
+    "dietaryTags": [
+      "VEGETARIAN"
+    ],
+    "spiceLevel": 3,
+    "price": 240,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "lemon-rice",
+    "name": "Lemon Rice",
+    "description": "Rice tempered with mustard seeds and curry leaves, finished with lemon and crunchy peanuts.",
+    "category": "RICE",
+    "ingredients": [
+      "rice",
+      "lemon",
+      "peanut",
+      "mustard seeds",
+      "curry leaves",
+      "oil"
+    ],
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN"
+    ],
+    "spiceLevel": 1,
+    "price": 150,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "tandoori-roti",
+    "name": "Tandoori Roti",
+    "description": "Unbuttered whole-wheat flatbread baked in a tandoor, with a crisp edge and chewy centre.",
+    "category": "BREAD",
+    "ingredients": [
+      "whole wheat flour",
+      "water",
+      "salt"
+    ],
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN"
+    ],
+    "spiceLevel": 0,
+    "price": 30,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "garlic-naan",
+    "name": "Garlic Naan",
+    "description": "Soft tandoor-baked wheat bread topped with garlic, coriander and butter.",
+    "category": "BREAD",
+    "ingredients": [
+      "wheat flour",
+      "yogurt",
+      "garlic",
+      "coriander",
+      "butter"
+    ],
+    "dietaryTags": [
+      "VEGETARIAN"
+    ],
+    "spiceLevel": 0,
+    "price": 60,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "lachha-paratha",
+    "name": "Lachha Paratha",
+    "description": "Layered whole-wheat flatbread cooked with ghee for a flaky texture.",
+    "category": "BREAD",
+    "ingredients": [
+      "whole wheat flour",
+      "ghee",
+      "water",
+      "salt"
+    ],
+    "dietaryTags": [
+      "VEGETARIAN"
+    ],
+    "spiceLevel": 0,
+    "price": 65,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "paneer-tikka",
+    "name": "Paneer Tikka",
+    "description": "Yogurt-marinated paneer, capsicum and onion grilled until lightly charred and smoky.",
+    "category": "STARTER",
+    "ingredients": [
+      "paneer",
+      "yogurt",
+      "capsicum",
+      "onion",
+      "spices"
+    ],
+    "dietaryTags": [
+      "VEGETARIAN"
+    ],
+    "spiceLevel": 2,
+    "price": 250,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "vegetable-samosa",
+    "name": "Vegetable Samosa",
+    "description": "Crisp wheat pastry filled with potatoes, peas and cumin-spiced vegetables.",
+    "category": "STARTER",
+    "ingredients": [
+      "wheat flour",
+      "potato",
+      "peas",
+      "cumin",
+      "oil",
+      "chilli"
+    ],
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN"
+    ],
+    "spiceLevel": 2,
+    "price": 80,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "onion-pakora",
+    "name": "Onion Pakora",
+    "description": "Thin onion slices coated in chickpea flour batter and fried until crisp.",
+    "category": "STARTER",
+    "ingredients": [
+      "onion",
+      "chickpea flour",
+      "chilli",
+      "oil",
+      "carom seeds"
+    ],
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN"
+    ],
+    "spiceLevel": 2,
+    "price": 100,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "chicken-tikka",
+    "name": "Chicken Tikka",
+    "description": "Boneless chicken marinated in yogurt and chilli spices, grilled with a smoky finish.",
+    "category": "STARTER",
+    "ingredients": [
+      "chicken",
+      "yogurt",
+      "chilli",
+      "ginger",
+      "garlic"
+    ],
+    "dietaryTags": [
+      "NON_VEGETARIAN"
+    ],
+    "spiceLevel": 3,
+    "price": 290,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "cucumber-raita",
+    "name": "Cucumber Raita",
+    "description": "Cool yogurt mixed with grated cucumber and roasted cumin; contains no chilli.",
+    "category": "SIDE",
+    "ingredients": [
+      "yogurt",
+      "cucumber",
+      "cumin",
+      "salt"
+    ],
+    "dietaryTags": [
+      "VEGETARIAN"
+    ],
+    "spiceLevel": 0,
+    "price": 80,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "kachumber-salad",
+    "name": "Kachumber Salad",
+    "description": "Chopped cucumber, tomato and onion dressed with lemon and coriander.",
+    "category": "SIDE",
+    "ingredients": [
+      "cucumber",
+      "tomato",
+      "onion",
+      "lemon",
+      "coriander"
+    ],
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN"
+    ],
+    "spiceLevel": 0,
+    "price": 70,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "rice-kheer",
+    "name": "Rice Kheer",
+    "description": "Rice slowly cooked in milk with sugar, cardamom and chopped almonds.",
+    "category": "DESSERT",
+    "ingredients": [
+      "rice",
+      "milk",
+      "sugar",
+      "cardamom",
+      "almond"
+    ],
+    "dietaryTags": [
+      "VEGETARIAN"
+    ],
+    "spiceLevel": 0,
+    "price": 100,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "gajar-halwa",
+    "name": "Gajar Halwa",
+    "description": "Grated carrots cooked with milk, ghee and sugar, finished with cashews.",
+    "category": "DESSERT",
+    "ingredients": [
+      "carrot",
+      "milk",
+      "ghee",
+      "sugar",
+      "cashew"
+    ],
+    "dietaryTags": [
+      "VEGETARIAN"
+    ],
+    "spiceLevel": 0,
+    "price": 120,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "mango-lassi",
+    "name": "Mango Lassi",
+    "description": "A thick chilled drink blended from mango, yogurt, milk and sugar.",
+    "category": "DRINK",
+    "ingredients": [
+      "mango",
+      "yogurt",
+      "milk",
+      "sugar"
+    ],
+    "dietaryTags": [
+      "VEGETARIAN"
+    ],
+    "spiceLevel": 0,
+    "price": 110,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "fresh-lime-soda",
+    "name": "Fresh Lime Soda",
+    "description": "A refreshing fizzy drink made with lime juice, soda water and sugar.",
+    "category": "DRINK",
+    "ingredients": [
+      "lime",
+      "soda water",
+      "sugar"
+    ],
+    "dietaryTags": [
+      "VEGETARIAN",
+      "VEGAN"
+    ],
+    "spiceLevel": 0,
+    "price": 80,
+    "currency": "INR",
+    "available": true
+  },
+  {
+    "sourceKey": "masala-chai",
+    "name": "Masala Chai",
+    "description": "Black tea simmered with milk, ginger and cardamom; aromatic rather than chilli-hot.",
+    "category": "DRINK",
+    "ingredients": [
+      "black tea",
+      "milk",
+      "ginger",
+      "cardamom",
+      "sugar"
+    ],
+    "dietaryTags": [
+      "VEGETARIAN"
+    ],
+    "spiceLevel": 0,
+    "price": 50,
+    "currency": "INR",
+    "available": true
+  }
+]
