@@ -60,6 +60,36 @@ public class RetrievalRepository {
         return result;
     }
 
+    /** Exact references are internal, bounded, and do not need semantic rediscovery. */
+    @Transactional(readOnly = true, isolation = Isolation.REPEATABLE_READ)
+    public List<RetrievedDocumentDto> referencedMenu(List<Long> ids, String fingerprint) {
+        if (ids.isEmpty() || ids.size() > 5 || ids.stream().anyMatch(id -> id == null || id <= 0)) {
+            throw new IllegalArgumentException("Expected one to five menu references");
+        }
+        checkReady(fingerprint);
+        List<Object> args = new ArrayList<>();
+        args.add(KnowledgeDocuments.CORPUS);
+        args.addAll(ids);
+        String sql = MENU_JOIN + " AND m.id IN (" + String.join(",", Collections.nCopies(ids.size(), "?")) + ")";
+        var integrity = jdbc.queryForList("SELECT m.id, v.id AS vector_id, v.metadata->>'embeddingFingerprint' AS fingerprint " + sql, args.toArray());
+        Set<Long> seen = new HashSet<>();
+        for (var row : integrity) {
+            if (row.get("vector_id") == null || !fingerprint.equals(row.get("fingerprint"))
+                    || !seen.add(((Number)row.get("id")).longValue())) {
+                throw unavailable("KNOWLEDGE_INDEX_INCOMPLETE", "Referenced item knowledge needs republication");
+            }
+        }
+        var documents = jdbc.query("""
+                SELECT v.id AS document_id, v.content, v.metadata->>'sourceId' AS source_id,
+                  v.metadata->>'title' AS title, v.metadata->>'sourcePath' AS source_path,
+                  v.metadata->>'contentHash' AS content_hash, 1.0 AS score, m.*
+                """ + sql, (rs, row) -> document(rs, "MENU", new RetrievalMenuItemDto(rs.getLong("id"),
+                rs.getString("name"), rs.getString("description"), rs.getString("category"),
+                strings(rs, "ingredients"), strings(rs, "dietary_tags"), rs.getInt("spice_level"),
+                rs.getBigDecimal("price"), rs.getString("currency"), rs.getBoolean("available"))), args.toArray());
+        return ids.stream().flatMap(id -> documents.stream().filter(doc -> doc.getMenuItem().getId().equals(id))).toList();
+    }
+
     private RetrievalBranchDto menu(RetrievalFiltersDto filters, float[] vector, String fingerprint, double threshold) {
         List<Object> args = new ArrayList<>();
         args.add(KnowledgeDocuments.CORPUS);

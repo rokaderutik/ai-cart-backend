@@ -235,6 +235,24 @@ class Phase4DatabaseTests {
         }
     }
 
+    @Test
+    void exactReferencesUseCurrentFactsPreserveOrderAndRejectBrokenIndex() {
+        rollback(() -> {
+            Long first = jdbc.queryForObject("SELECT id FROM menu_item WHERE source_key='paneer-butter-masala'", Long.class);
+            Long second = jdbc.queryForObject("SELECT id FROM menu_item WHERE source_key='dal-tadka'", Long.class);
+            jdbc.update("UPDATE menu_item SET price=299.99, available=false WHERE id=?", first);
+            var documents = repository.referencedMenu(List.of(second, first), FINGERPRINT);
+            assertThat(documents).extracting(doc -> doc.getMenuItem().getId()).containsExactly(second, first);
+            assertThat(documents.getLast().getMenuItem().getPrice()).isEqualByComparingTo("299.99");
+            assertThat(documents.getLast().getMenuItem().isAvailable()).isFalse();
+            jdbc.update("UPDATE menu_item SET source_active=false WHERE id=?", first);
+            assertThat(repository.referencedMenu(List.of(first, second), FINGERPRINT)).hasSize(1);
+            jdbc.update("DELETE FROM vector_store WHERE metadata->>'itemId'=?", second.toString());
+            assertThatThrownBy(() -> repository.referencedMenu(List.of(second), FINGERPRINT))
+                    .isInstanceOf(ApiException.class).extracting("code").isEqualTo("KNOWLEDGE_INDEX_INCOMPLETE");
+        });
+    }
+
     private static RetrievalResponseDto search(RetrievalRequestDto request, double menu, double guide) {
         return repository.search(RetrievalValidation.normalize(request), Map.of("query", QUERY), FINGERPRINT, menu, guide);
     }

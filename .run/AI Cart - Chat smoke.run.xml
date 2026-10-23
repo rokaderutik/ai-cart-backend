@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="AI Cart - Chat smoke" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="aicartapp" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="com.rutikrokade.projects.aicartapp.AicartappApplication" />
+    <option name="PROGRAM_PARAMETERS" value="--spring.profiles.active=dev,chat-smoke" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    <method v="2"><option name="Make" enabled="true" /></method>
+  </configuration>
+</component>

@@ -1,0 +1,136 @@
+{
+  "type": "object",
+  "properties": {
+    "intent": {
+      "type": "string",
+      "enum": [
+        "KNOWLEDGE",
+        "CLARIFICATION",
+        "GREETING",
+        "OUT_OF_SCOPE",
+        "CART_READ",
+        "CART_ACTION"
+      ]
+    },
+    "target": {
+      "type": "string",
+      "enum": [
+        "MENU",
+        "GUIDE",
+        "BOTH"
+      ],
+      "nullable": true
+    },
+    "operation": {
+      "type": "string",
+      "enum": [
+        "RECOMMEND",
+        "DETAILS",
+        "COMPARE"
+      ]
+    },
+    "menuQuery": {
+      "type": "string",
+      "nullable": true
+    },
+    "guideQuery": {
+      "type": "string",
+      "nullable": true
+    },
+    "preferences": {
+      "type": "object",
+      "properties": {
+        "maxPrice": {
+          "type": "number",
+          "nullable": true
+        },
+        "priceComparison": {
+          "type": "string",
+          "enum": [
+            "LT",
+            "LTE"
+          ]
+        },
+        "dietaryTags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "nullable": true
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "nullable": true
+        },
+        "minSpiceLevel": {
+          "type": "integer",
+          "nullable": true
+        },
+        "maxSpiceLevel": {
+          "type": "integer",
+          "nullable": true
+        },
+        "clearFields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "maxPrice",
+        "priceComparison",
+        "dietaryTags",
+        "categories",
+        "minSpiceLevel",
+        "maxSpiceLevel",
+        "clearFields"
+      ],
+      "additionalProperties": false
+    },
+    "itemIds": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      }
+    },
+    "referencePositions": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      }
+    },
+    "usePreviousRecommendations": {
+      "type": "boolean"
+    },
+    "requiresRestaurantConfirmation": {
+      "type": "boolean"
+    },
+    "clarification": {
+      "type": "string",
+      "nullable": true
+    },
+    "unsupportedPart": {
+      "type": "string",
+      "nullable": true
+    }
+  },
+  "required": [
+    "intent",
+    "target",
+    "operation",
+    "menuQuery",
+    "guideQuery",
+    "preferences",
+    "itemIds",
+    "referencePositions",
+    "usePreviousRecommendations",
+    "requiresRestaurantConfirmation",
+    "clarification",
+    "unsupportedPart"
+  ],
+  "additionalProperties": false
+}
