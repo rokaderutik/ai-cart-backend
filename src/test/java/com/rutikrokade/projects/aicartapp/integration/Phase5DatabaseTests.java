@@ -204,7 +204,7 @@ class Phase5DatabaseTests {
             var plan = new ChatPlanDto(); plan.setIntent(ChatPlanDto.Intent.GREETING); return plan;
         });
         var service = new ChatServiceImpl(persistence, planner, mock(GroundedAnswerService.class), mock(RetrievalService.class),
-                mock(RetrievalRepository.class), mock(RetrievalEmbeddingModel.class), carts);
+                mock(RetrievalRepository.class), mock(RetrievalEmbeddingModel.class), carts, mock(CartActionService.class));
         try (var pool = Executors.newFixedThreadPool(2)) {
             var chat = pool.submit(() -> service.chat(session, request("hello")));
             assertThat(entered.await(15, TimeUnit.SECONDS)).isTrue();

@@ -44,6 +44,17 @@ class ChatControllerTests {
         verify(persistence).history("session", 30L, 10);
     }
 
+    @Test void cartOutcomeIsAnAdditiveFieldInTheExistingEnvelope() throws Exception {
+        var response = new ChatResponseDto(); response.setReply("Dish is now quantity 2."); response.setOutcome("CART_UPDATED");
+        var result = new CartActionResultDto(); result.setItemId(1L); result.setPreviousQuantity(1); result.setQuantity(2);
+        result.setOperation(CartInstructionDto.Operation.SET); result.setOutcome("CART_UPDATED"); response.setActionResult(result);
+        when(chat.chat(eq("session"), any())).thenReturn(response);
+        mvc.perform(post("/api/v1/chat").contextPath("/api/v1").header("X-Session-Id", "session")
+                .contentType("application/json").content("{\"requestId\":\"00000000-0000-4000-8000-000000000001\",\"message\":\"Make that two\"}"))
+                .andExpect(status().isOk()).andExpect(jsonPath("$.data.actionResult.itemId").value(1))
+                .andExpect(jsonPath("$.data.actionResult.quantity").value(2)).andExpect(jsonPath("$.error").doesNotExist());
+    }
+
     @Test void routingFieldsAreRejected() throws Exception {
         mvc.perform(post("/api/v1/chat").contextPath("/api/v1").contentType("application/json")
                 .content("{\"message\":\"hi\",\"target\":\"MENU\"}"))

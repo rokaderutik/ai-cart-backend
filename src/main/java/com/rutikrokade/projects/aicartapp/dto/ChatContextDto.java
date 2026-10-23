@@ -17,5 +17,9 @@ public class ChatContextDto {
 
     private boolean restaurantConfirmationRequired;
 
-    private int version = 1;
+    private Long lastCartItemId;
+
+    private PendingCartActionDto pendingCartAction;
+
+    private int version = 2;
 }

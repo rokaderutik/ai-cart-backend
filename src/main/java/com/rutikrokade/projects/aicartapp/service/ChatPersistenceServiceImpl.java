@@ -57,15 +57,21 @@ public class ChatPersistenceServiceImpl implements ChatPersistenceService {
     @Override
     @Transactional
     public ChatResponseDto complete(String session, ChatTurnDto turn, ChatResponseDto response, ChatContextDto context) {
+        requireAttempt(session, turn);
+        repository.complete(session, turn.getRequestId(), turn.getAttemptToken(), response, context);
+        log.info("Completed chat request {} outcome={}", turn.getRequestId(), response.getOutcome());
+        return response;
+    }
+
+    @Override
+    @Transactional(propagation = org.springframework.transaction.annotation.Propagation.MANDATORY)
+    public void requireAttempt(String session, ChatTurnDto turn) {
         sessions.lockActiveSession(session);
         var row = repository.request(session, turn.getRequestId());
         if (row == null || !turn.getAttemptToken().equals(row.get("attempt_token")) || !"IN_PROGRESS".equals(row.get("status"))
                 || !((java.sql.Timestamp)row.get("lease_expires_at")).toInstant().isAfter(clock.instant())) {
             throw conflict("CHAT_ATTEMPT_EXPIRED", "This processing attempt expired; retry the request");
         }
-        repository.complete(session, turn.getRequestId(), turn.getAttemptToken(), response, context);
-        log.info("Completed chat request {} outcome={}", turn.getRequestId(), response.getOutcome());
-        return response;
     }
 
     @Override

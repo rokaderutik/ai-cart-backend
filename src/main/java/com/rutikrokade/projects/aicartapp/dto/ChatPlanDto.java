@@ -33,4 +33,6 @@ public class ChatPlanDto {
     private String clarification;
 
     private String unsupportedPart;
+
+    private CartInstructionDto cartAction;
 }

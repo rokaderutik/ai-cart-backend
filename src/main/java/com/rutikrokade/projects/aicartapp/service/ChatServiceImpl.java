@@ -1,7 +1,6 @@
 package com.rutikrokade.projects.aicartapp.service;
 
 import java.util.*;
-import java.util.stream.Collectors;
 import com.rutikrokade.projects.aicartapp.dto.*;
 import com.rutikrokade.projects.aicartapp.exception.ApiException;
 import com.rutikrokade.projects.aicartapp.repository.RetrievalRepository;
@@ -26,6 +25,8 @@ public class ChatServiceImpl implements ChatService {
     private final RetrievalEmbeddingModel embedding;
     private final CartService carts;
 
+    private final CartActionService cartActions;
+
     @Override
     public ChatResponseDto chat(String sessionId, ChatRequestDto request) {
         validate(request);
@@ -45,13 +46,20 @@ public class ChatServiceImpl implements ChatService {
             ChatPlanDto plan = planner.plan(normalized.getMessage(), turn, cart, budget);
             response.getTimings().put("planningMillis", millis(stage));
             var context = StructuredChatClient.JSON.convertValue(turn.getContext(), ChatContextDto.class);
+            context.setVersion(2);
             response.getDiagnostics().put("intent", plan.getIntent());
             response.getDiagnostics().put("target", plan.getTarget());
             response.getDiagnostics().put("promptVersion", StructuredChatClient.VERSION);
+            if (plan.getIntent() == ChatPlanDto.Intent.CART_ACTION) {
+                return cartActions.handle(sessionId, normalized.getMessage(), plan, turn, cart, response, context, budget, start);
+            }
+            context.setPendingCartAction(null);
+            if ((plan.getIntent() == ChatPlanDto.Intent.KNOWLEDGE && plan.getTarget() != RetrievalRequestDto.Target.GUIDE)
+                    || plan.getIntent() == ChatPlanDto.Intent.CLARIFICATION) context.setLastCartItemId(null);
             switch (plan.getIntent()) {
                 case GREETING -> simple(response, "GREETING", "Hello! I can help you explore our menu and restaurant information.");
                 case OUT_OF_SCOPE -> simple(response, "OUT_OF_SCOPE", "I can help with this restaurant's menu, policies and your cart. Please ask a restaurant-related question.");
-                case CART_ACTION -> simple(response, "CART_ACTION_UNAVAILABLE", "Please use the cart controls to add, remove or change items. Chat cart actions are not available yet.");
+                case CART_ACTION -> throw new IllegalStateException("Cart action must use the transactional handler");
                 case CART_READ -> simple(response, "CART", cart.getItems().isEmpty() ? "Your cart is empty."
                         : "Your current cart contains " + cart.getItems().size() + " item types. Total: " + cart.getCurrency() + " " + cart.getTotal().toPlainString() + ".");
                 case CLARIFICATION -> {
@@ -69,12 +77,7 @@ public class ChatServiceImpl implements ChatService {
                     && plan.getIntent() == ChatPlanDto.Intent.KNOWLEDGE) {
                 section(response, "I can only answer the restaurant-related part of that question.", List.of());
             }
-            response.setReply(response.getSections().stream().map(ChatAnswerSectionDto::getText).collect(Collectors.joining("\n\n")));
-            response.getTimings().put("totalMillis", millis(start));
-            response.getDiagnostics().put("modelCalls", budget.getCalls());
-            response.getDiagnostics().put("repairUsed", budget.isRepaired());
-            response.getDiagnostics().put("inputTokens", budget.getInputTokens());
-            response.getDiagnostics().put("outputTokens", budget.getOutputTokens());
+            ChatResponses.finish(response, budget, start);
             log.info("Chat request {} outcome={} sources={} modelCalls={} elapsedMs={}", request.getRequestId(),
                     response.getOutcome(), response.getSources().stream().map(ChatSourceDto::getSourceId).toList(), budget.getCalls(), millis(start));
             return persistence.complete(sessionId, turn, response, context);

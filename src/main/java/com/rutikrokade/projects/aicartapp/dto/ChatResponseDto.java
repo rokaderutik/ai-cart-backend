@@ -22,6 +22,8 @@ public class ChatResponseDto {
 
     private CartDto cart;
 
+    private CartActionResultDto actionResult;
+
     private Map<String, Long> timings = new LinkedHashMap<>();
 
     private Map<String, Object> diagnostics = new LinkedHashMap<>();

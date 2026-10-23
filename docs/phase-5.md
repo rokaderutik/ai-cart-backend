@@ -1,5 +1,9 @@
 # Phase 5 — Grounded chat and session context
 
+Phase 6 now extends this baseline with native cart tools and v2 prompts. See
+[Phase 6](phase-6.md) for current cart behavior, action results and atomic completion.
+The Phase 5 implementation and verification notes below describe its original scope.
+
 ## Run
 
 Start **AI Cart - Backend (dev)** in IntelliJ as usual, or:

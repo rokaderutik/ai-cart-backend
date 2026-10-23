@@ -25,7 +25,14 @@ public class QueryPlanningServiceImpl implements QueryPlanningService {
         input.put("catalog", turn.getCatalog());
         input.put("cart", cart);
         ChatPlanDto result = client.generate("planner", input, ChatPlanDto.class,
-                plan -> ChatPlanValidation.validate(plan, message, turn), budget);
+                plan -> {
+                    ChatPlanValidation.validate(plan, message, turn);
+                    if (plan.getIntent() == ChatPlanDto.Intent.CART_ACTION) {
+                        // Check reference integrity inside the shared repair budget, without changing session state.
+                        CartActionResolver.prepare(message, plan, turn, cart,
+                                StructuredChatClient.JSON.convertValue(turn.getContext(), ChatContextDto.class), new ChatResponseDto());
+                    }
+                }, budget);
         log.info("Planned chat request {} intent={} target={} operation={} confirmation={}",
                 turn.getRequestId(), result.getIntent(), result.getTarget(), result.getOperation(), result.isRequiresRestaurantConfirmation());
         return result;

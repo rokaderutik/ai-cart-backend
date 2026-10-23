@@ -6,7 +6,9 @@ Phase 3 adds validated menu/guide sources, repeatable embedding ingestion, stabl
 
 Phase 4 adds exact database filters, separate menu/guide retrieval, explicit empty/partial evidence outcomes, and a development inspection API. See [the Phase 4 retrieval guide](docs/phase-4.md) for Postman examples, the IntelliJ evaluation configuration, and measured development results.
 
-Phase 5 adds grounded English chat, automatic MENU/GUIDE/BOTH routing, session preferences, follow-up references, persisted history and reliable request retries. See [the Phase 5 chat guide](docs/phase-5.md) for endpoints, request bodies, behavior and the IntelliJ chat smoke configuration. Users send ordinary messages; cart actions through chat are reserved for Phase 6.
+Phase 5 adds grounded English chat, automatic MENU/GUIDE/BOTH routing, session preferences, follow-up references, persisted history and reliable request retries. See [the Phase 5 chat guide](docs/phase-5.md) for the chat contract.
+
+Phase 6 adds single-dish cart changes through native AI tools, validated references, atomic action/history persistence and duplicate-request replay. See [the Phase 6 cart tool guide](docs/phase-6.md) for Postman examples, limits and the IntelliJ cart tool smoke configuration.
 
 ## Requirements
 

@@ -81,8 +81,9 @@
       {
         "message": "Add two Dal Tadka to my cart.",
         "outcomes": [
-          "CART_ACTION_UNAVAILABLE"
+          "CART_UPDATED"
         ],
+        "cartQuantity": 2,
         "skipRetrieval": true
       },
       {
@@ -90,6 +91,7 @@
         "outcomes": [
           "CART"
         ],
+        "cartQuantity": 2,
         "skipRetrieval": true
       }
     ]

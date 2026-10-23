@@ -23,6 +23,8 @@ public final class ChatPlanValidation {
         bounded(plan.getClarification(), 500);
         bounded(plan.getUnsupportedPart(), 500);
         for (Long id : plan.getItemIds()) {
+            // Cart IDs are checked against the current message and cart by CartActionResolver.
+            if (plan.getIntent() == ChatPlanDto.Intent.CART_ACTION) continue;
             boolean named = turn.getCatalog().stream().anyMatch(item ->
                     ((Number)item.get("id")).longValue() == id
                     && message.toLowerCase(Locale.ROOT).contains(item.get("name").toString().toLowerCase(Locale.ROOT)));
@@ -30,6 +32,11 @@ public final class ChatPlanValidation {
         }
         // Apply validation even to non-knowledge output; malformed model filters never enter session context.
         mergedFilters(turn.getContext().getPreferences(), update);
+        if (plan.getIntent() == ChatPlanDto.Intent.CART_ACTION) {
+            require(plan.getCartAction() != null && plan.getCartAction().getReference() != null);
+        } else {
+            require(plan.getCartAction() == null);
+        }
         if (plan.getIntent() == ChatPlanDto.Intent.KNOWLEDGE) {
             require(plan.getTarget() != null);
             if (plan.getTarget() != RetrievalRequestDto.Target.GUIDE) query(plan.getMenuQuery());

@@ -1,0 +1,42 @@
+{
+  "type": "object",
+  "properties": {
+    "sections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "sourceIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "text",
+          "sourceIds"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "recommendationIds": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      }
+    },
+    "informationMissing": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "sections",
+    "recommendationIds",
+    "informationMissing"
+  ],
+  "additionalProperties": false
+}

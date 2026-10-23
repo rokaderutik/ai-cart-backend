@@ -85,8 +85,9 @@ public class ChatRepository {
         metadata.remove("reply");
         jdbc.update("UPDATE chat_message SET metadata_json=?::jsonb WHERE id=?", json.writeValueAsString(metadata), id);
         jdbc.update("UPDATE guest_session SET context_json=?::jsonb WHERE id=?", json.writeValueAsString(context), session);
-        int updated = jdbc.update("UPDATE chat_request SET status='COMPLETED', response_json=?::jsonb, updated_at=now() WHERE session_id=? AND request_id=? AND attempt_token=? AND status='IN_PROGRESS'",
-                json.writeValueAsString(response), session, requestId, attempt);
+        int updated = jdbc.update("UPDATE chat_request SET status='COMPLETED', response_json=?::jsonb, action_result_json=?::jsonb, updated_at=now() WHERE session_id=? AND request_id=? AND attempt_token=? AND status='IN_PROGRESS'",
+                json.writeValueAsString(response), response.getActionResult() == null ? null : json.writeValueAsString(response.getActionResult()),
+                session, requestId, attempt);
         if (updated != 1) throw new IllegalStateException("Chat completion lost ownership");
     }
 

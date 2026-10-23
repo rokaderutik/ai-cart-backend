@@ -9,6 +9,8 @@ public interface ChatPersistenceService {
 
     ChatResponseDto complete(String session, ChatTurnDto turn, ChatResponseDto response, ChatContextDto context);
 
+    void requireAttempt(String session, ChatTurnDto turn);
+
     void fail(String session, ChatTurnDto turn, String code);
 
     ChatHistoryDto history(String session, Long before, int limit);

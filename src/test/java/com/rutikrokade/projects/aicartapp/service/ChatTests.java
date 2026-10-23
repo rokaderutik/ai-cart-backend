@@ -159,7 +159,7 @@ class ChatTests {
         verify(model).call(any(org.springframework.ai.chat.prompt.Prompt.class));
     }
 
-    @Test void greetingAndCartActionsNeverRetrieveOrMutateAndReplaySkipsModels() {
+    @Test void greetingNeverRetrievesOrMutatesAndReplaySkipsModels() {
         var persistence = mock(ChatPersistenceService.class);
         var planner = mock(QueryPlanningService.class);
         var answer = mock(GroundedAnswerService.class);
@@ -167,16 +167,16 @@ class ChatTests {
         var repository = mock(RetrievalRepository.class);
         var embedding = mock(RetrievalEmbeddingModel.class);
         var carts = mock(CartService.class);
-        var service = new ChatServiceImpl(persistence, planner, answer, retrieval, repository, embedding, carts);
+        var service = new ChatServiceImpl(persistence, planner, answer, retrieval, repository, embedding, carts, mock(CartActionService.class));
         var request = new ChatRequestDto(); request.setRequestId(UUID.randomUUID()); request.setMessage("add two");
         var turn = turn();
         when(persistence.begin(any(), any())).thenReturn(turn);
-        var plan = plan(); plan.setIntent(ChatPlanDto.Intent.CART_ACTION); plan.setTarget(null);
+        var plan = plan(); plan.setIntent(ChatPlanDto.Intent.GREETING); plan.setTarget(null);
         when(planner.plan(any(), any(), any(), any())).thenReturn(plan);
         when(carts.getCart("session")).thenReturn(new CartDto("cart", List.of(), BigDecimal.ZERO, "INR"));
         when(persistence.complete(any(), any(), any(), any())).thenAnswer(call -> call.getArgument(2));
         var result = service.chat("session", request);
-        assertThat(result.getOutcome()).isEqualTo("CART_ACTION_UNAVAILABLE");
+        assertThat(result.getOutcome()).isEqualTo("GREETING");
         verifyNoInteractions(answer, retrieval, repository, embedding);
         verify(carts).getCart("session"); verifyNoMoreInteractions(carts);
         turn.setReplay(result);
@@ -190,6 +190,25 @@ class ChatTests {
                 .isInstanceOf(RuntimeException.class);
         assertThatThrownBy(() -> StructuredChatClient.JSON.readValue("{\"message\":\"a\",\"message\":\"b\"}", ChatRequestDto.class))
                 .isInstanceOf(RuntimeException.class);
+    }
+
+    @Test void cartActionUsesItsAtomicCompletionAndKnowledgeClearsStaleCartFocus() {
+        var fixture = new Flow();
+        fixture.plan.setIntent(ChatPlanDto.Intent.CART_ACTION);
+        var completed = new ChatResponseDto(); completed.setOutcome("CART_UPDATED");
+        when(fixture.actions.handle(any(), any(), any(), any(), any(), any(), any(), any(), anyLong())).thenReturn(completed);
+        assertThat(fixture.run()).isSameAs(completed);
+        verify(fixture.persistence, never()).complete(any(), any(), any(), any());
+        verifyNoInteractions(fixture.retrieval, fixture.answers);
+        fixture.plan.setIntent(ChatPlanDto.Intent.KNOWLEDGE);
+        fixture.turn.getContext().setLastCartItemId(11L);
+        fixture.turn.getContext().setPendingCartAction(new PendingCartActionDto());
+        var found = new RetrievalResponseDto();
+        found.setMenu(new RetrievalBranchDto(RetrievalBranchDto.Outcome.NO_ELIGIBLE_ITEMS, 0, .69, List.of()));
+        when(fixture.retrieval.retrieve(any())).thenReturn(found);
+        fixture.run();
+        assertThat(fixture.saved.getLastCartItemId()).isNull();
+        assertThat(fixture.saved.getPendingCartAction()).isNull();
     }
 
     @Test void noEligibleItemsKeepsConstraintsAndClearsPreviousRecommendations() {
@@ -275,10 +294,11 @@ class ChatTests {
         final RetrievalRepository repository = mock(RetrievalRepository.class);
         final RetrievalEmbeddingModel embedding = mock(RetrievalEmbeddingModel.class);
         final CartService carts = mock(CartService.class);
+        final CartActionService actions = mock(CartActionService.class);
         final ChatTurnDto turn = turn();
         final ChatPlanDto plan = plan();
         ChatContextDto saved;
-        final ChatService service = new ChatServiceImpl(persistence, planner, answers, retrieval, repository, embedding, carts);
+        final ChatService service = new ChatServiceImpl(persistence, planner, answers, retrieval, repository, embedding, carts, actions);
 
         Flow() {
             when(persistence.begin(any(), any())).thenReturn(turn);

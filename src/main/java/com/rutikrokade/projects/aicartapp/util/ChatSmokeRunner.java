@@ -44,7 +44,8 @@ public class ChatSmokeRunner implements ApplicationRunner {
                         var result = chat.chat(session, request);
                         var checks = new LinkedHashMap<String,Boolean>();
                         checks.put("boundedModelCalls", ((Number)result.getDiagnostics().get("modelCalls")).intValue() <= 3);
-                        checks.put("cartUnchanged", carts.getCart(session).getItems().isEmpty());
+                        int expectedQuantity = test.containsKey("cartQuantity") ? ((Number)test.get("cartQuantity")).intValue() : 0;
+                        checks.put("cartQuantity", carts.getCart(session).getItems().stream().mapToInt(CartItemDto::getQuantity).sum() == expectedQuantity);
                         if (test.containsKey("target")) checks.put("target", test.get("target").equals(String.valueOf(result.getDiagnostics().get("target"))));
                         if (test.containsKey("outcomes")) checks.put("outcome", ((List<?>)test.get("outcomes")).contains(result.getOutcome()));
                         if (test.containsKey("cards")) checks.put("cards", result.getRecommendations().size() >= 2
@@ -54,7 +55,7 @@ public class ChatSmokeRunner implements ApplicationRunner {
                         if (test.containsKey("noCards")) checks.put("noCards", result.getRecommendations().isEmpty());
                         if (test.containsKey("both")) checks.put("bothSources", result.getSources().stream().anyMatch(s -> s.getSourceType().equals("MENU"))
                                 && result.getSources().stream().anyMatch(s -> s.getSourceType().equals("GUIDE")));
-                        if (test.containsKey("skipRetrieval")) checks.put("skipRetrieval", !result.getDiagnostics().containsKey("embeddingCalls"));
+                        if (test.containsKey("skipRetrieval")) checks.put("skipRetrieval", ((Number)result.getDiagnostics().getOrDefault("embeddingCalls", 0)).intValue() == 0);
                         if (test.containsKey("scopeNotice")) checks.put("scopeNotice", result.getReply().contains("restaurant-related part"));
                         var replay = chat.chat(session, request);
                         checks.put("replay", result.getAssistantMessageId().equals(replay.getAssistantMessageId()) && result.getReply().equals(replay.getReply()));

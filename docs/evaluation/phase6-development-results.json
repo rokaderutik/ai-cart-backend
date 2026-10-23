@@ -1,0 +1,148 @@
+{
+    "date":  "2026-10-23",
+    "verification":  "Local backend with the configured real Google model and Neon database",
+    "model":  "gemini-3.5-flash-lite",
+    "promptVersion":  "v2",
+    "regression":  {
+                       "errors":  0,
+                       "tests":  167,
+                       "failures":  0
+                   },
+    "affectedRerun":  {
+                          "errors":  0,
+                          "tests":  40,
+                          "failures":  0
+                      },
+    "finalReferenceRerun":  {
+                                "errors":  0,
+                                "tests":  31,
+                                "failures":  0
+                            },
+    "package":  "passed",
+    "live":  {
+                 "turns":  10,
+                 "passed":  10,
+                 "sessionCleaned":  true,
+                 "smokePauseMillis":  10000,
+                 "checks":  [
+                                "saved recommendation order",
+                                "add",
+                                "absolute quantity",
+                                "increment",
+                                "decrement",
+                                "no change",
+                                "remove",
+                                "unknown item clarification",
+                                "multiple dish clarification",
+                                "unsupported checkout",
+                                "request replay",
+                                "single transcript pair",
+                                "authoritative database cart",
+                                "at most three model calls"
+                            ],
+                 "turnsDetail":  [
+                                     {
+                                         "message":  "Suggest at least two mild vegetarian main dishes under 300 rupees.",
+                                         "outcome":  "ANSWERED",
+                                         "itemId":  null,
+                                         "previousQuantity":  null,
+                                         "quantity":  null,
+                                         "modelCalls":  2,
+                                         "repairUsed":  false,
+                                         "replayAndHistoryPassed":  true
+                                     },
+                                     {
+                                         "message":  "Add the first dish.",
+                                         "outcome":  "CART_UPDATED",
+                                         "itemId":  26,
+                                         "previousQuantity":  0,
+                                         "quantity":  1,
+                                         "modelCalls":  2,
+                                         "repairUsed":  false,
+                                         "replayAndHistoryPassed":  true
+                                     },
+                                     {
+                                         "message":  "Make that two.",
+                                         "outcome":  "CART_UPDATED",
+                                         "itemId":  26,
+                                         "previousQuantity":  1,
+                                         "quantity":  2,
+                                         "modelCalls":  2,
+                                         "repairUsed":  false,
+                                         "replayAndHistoryPassed":  true
+                                     },
+                                     {
+                                         "message":  "Add one more.",
+                                         "outcome":  "CART_UPDATED",
+                                         "itemId":  26,
+                                         "previousQuantity":  2,
+                                         "quantity":  3,
+                                         "modelCalls":  2,
+                                         "repairUsed":  false,
+                                         "replayAndHistoryPassed":  true
+                                     },
+                                     {
+                                         "message":  "Remove one.",
+                                         "outcome":  "CART_UPDATED",
+                                         "itemId":  26,
+                                         "previousQuantity":  3,
+                                         "quantity":  2,
+                                         "modelCalls":  2,
+                                         "repairUsed":  false,
+                                         "replayAndHistoryPassed":  true
+                                     },
+                                     {
+                                         "message":  "Make that two.",
+                                         "outcome":  "CART_UNCHANGED",
+                                         "itemId":  26,
+                                         "previousQuantity":  2,
+                                         "quantity":  2,
+                                         "modelCalls":  2,
+                                         "repairUsed":  false,
+                                         "replayAndHistoryPassed":  true
+                                     },
+                                     {
+                                         "message":  "Remove it.",
+                                         "outcome":  "CART_UPDATED",
+                                         "itemId":  26,
+                                         "previousQuantity":  2,
+                                         "quantity":  0,
+                                         "modelCalls":  2,
+                                         "repairUsed":  false,
+                                         "replayAndHistoryPassed":  true
+                                     },
+                                     {
+                                         "message":  "Add one Moon Rock Soup.",
+                                         "outcome":  "CLARIFICATION",
+                                         "itemId":  null,
+                                         "previousQuantity":  null,
+                                         "quantity":  null,
+                                         "modelCalls":  1,
+                                         "repairUsed":  false,
+                                         "replayAndHistoryPassed":  true
+                                     },
+                                     {
+                                         "message":  "Add the first and second dishes.",
+                                         "outcome":  "CLARIFICATION",
+                                         "itemId":  null,
+                                         "previousQuantity":  null,
+                                         "quantity":  null,
+                                         "modelCalls":  1,
+                                         "repairUsed":  false,
+                                         "replayAndHistoryPassed":  true
+                                     },
+                                     {
+                                         "message":  "Checkout.",
+                                         "outcome":  "CART_ACTION_UNAVAILABLE",
+                                         "itemId":  null,
+                                         "previousQuantity":  null,
+                                         "quantity":  null,
+                                         "modelCalls":  1,
+                                         "repairUsed":  false,
+                                         "replayAndHistoryPassed":  true
+                                     }
+                                 ]
+             },
+    "providerObservation":  "An earlier unpaced run completed nine turns before a Google 429 on checkout. It stopped safely. The final paced run completed all ten turns.",
+    "deploymentVerified":  false
+}
